@@ -1,0 +1,107 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Modifier équipe</h1>
+    <p class="mb-4">
+        <a routerLink="/dashboard/home/admin-teams" class="btn btn-primary">Retour</a>
+    </p>
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Modifier</h6>
+        </div>
+        <div class="card-body">
+
+            <form [formGroup]="form" class="user" (ngSubmit)="update()">
+
+                <div class="form-group">
+                    <label for="">Nom d'équipe</label>
+                    <input type="text" formControlName="name" class="form-control " >
+                </div>
+
+
+
+                <button type="submit" [disabled]="! form.valid" class="btn btn-primary btn-user btn-block">
+                    Modifier maintenant
+                </button>
+
+                <div class="form-group my-2" *ngIf="errMsg!=''">
+                    <div class="alert alert-danger">
+                        {{errMsg}}
+                    </div>
+                </div>
+                <div class="form-group my-2" *ngIf="successMsg!=''">
+                    <div class="alert alert-success">
+                        {{successMsg}}
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Membres de l'équipe</h6>
+            </div>
+            <div class="card-body">
+    
+                <form [formGroup]="addE" class="user" (ngSubmit)="affectEmpoyeeToTeam()">
+    
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="">
+                                Membre
+                            </label>
+                            <select formControlName="user_id" class="form-control ">
+                                <option value="">Veuillez choisir un membre</option>
+                                <option value="{{e.id}}" *ngFor="let e of employees">{{e.name}}</option>
+        
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-primary btn-block mt-4" type="submit">Ajouter</button>
+                        </div>
+                    </div>
+                </form>
+                
+                    <div class="row mt-5">
+                        <div class="col-sm-12">
+                            
+
+                            <ol class="list-group list-group-numbered">
+                                <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let e of affectedEmployees">
+                                  <div class="ms-2 me-auto">
+                                    <div class="fw-bold">{{e.user.name}}</div>
+                                    {{e.user.email}}
+                                  </div>
+                                  <span class="">
+                                      <button class="btn btn-sm btn-danger" (click)="deleteAffect(e.id)">
+                                        enlever
+                                      </button>
+                                  </span>
+                                </li>
+                              </ol>
+                        </div>
+                    </div>
+                    
+    
+                
+    
+    
+            </div>
+        </div>
+        
+    
+    
+
+
+
+</div>

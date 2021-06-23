@@ -1,0 +1,10 @@
+admin
+    username : admin
+    password: 123456
+
+employees
+    username:jorge_white
+    password:123456
+
+    username:snow_black
+    password:123456

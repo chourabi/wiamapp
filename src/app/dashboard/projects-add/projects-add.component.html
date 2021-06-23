@@ -1,0 +1,88 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Ajouter une nouveau projet</h1>
+    <p class="mb-4">
+        <a routerLink="/dashboard/home/projects" class="btn btn-primary">Retour</a>
+    </p>
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Ajout</h6>
+        </div>
+        <div class="card-body">
+
+            <form [formGroup]="pform" class="user" (ngSubmit)="add()">
+
+                <div class="form-group">
+                    <label for="">Titre</label>
+                    <input type="text" formControlName="name" class="form-control "  >
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Date début</label>
+                            <input type="date" formControlName="start_date" class="form-control "  >
+                        </div>
+                        
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="">Date fin</label>
+                            <input type="date" formControlName="end_date" class="form-control "  >
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Pays</label>
+                    <input type="text" formControlName="country" class="form-control "  >
+                </div>
+                <div class="form-group">
+                    <label for="">
+                        Client
+                    </label>
+                    <select formControlName="clientId" class="form-control ">
+                        <option value="">Choissisez un client</option>
+                        <option value="{{c.id}}" *ngFor="let c of clients">{{c.name}}</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">activité</label>
+                    <textarea formControlName="activity" class="form-control " rows="5"></textarea>
+
+
+                </div>
+                
+                
+
+
+                
+                
+
+
+
+
+                <button type="submit" [disabled]="! pform.valid" class="btn btn-primary btn-user btn-block">
+                    Créer maintenant
+                </button>
+
+                <div class="form-group my-2" *ngIf="errMsg!=''">
+                    <div class="alert alert-danger">
+                        {{errMsg}}
+                    </div>
+                </div>
+                <div class="form-group my-2" *ngIf="successMsg!=''">
+                    <div class="alert alert-success">
+                        {{successMsg}}
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>

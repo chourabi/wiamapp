@@ -1,0 +1,110 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Liste des projets</h1>
+    
+    <p class="mb-4">
+        <a routerLink="/dashboard/home/projects-add" class="btn btn-primary">Ajouter</a>
+    </p>
+
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Liste des projets</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                    
+                    <ng2-smart-table [settings]="settings" [source]="data" (userRowSelect)="rowClick($event)"></ng2-smart-table>
+
+
+
+
+                    <!--<table  class="row-border hover" >
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Titre</th>
+                            <th>Client</th>
+                            <th>Pays</th>
+                            <th>Date lancement</th>
+                            <th>Date cloture</th>
+                            
+                            <th>Actions</th>
+                            
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        <tr  *ngFor="let p of projects">
+                            <td>
+                                {{p.id}}
+                            </td>
+                            <td>
+                                {{p.name}}
+                            </td>
+                            <td>
+                                {{p.client.name}}
+                            </td>
+                            <td>
+                                {{p.country}}
+                            </td>
+                            <td>
+                                {{p.start_date}}
+                            </td>
+                            <td>
+                                <span *ngIf="p.end_date == ''"> -- / -- / -----</span>
+                                <span *ngIf="p.end_date != null"> {{p.end_date}}</span>
+                                
+                            </td>
+                            
+                            
+                            
+                            <td>
+                                <button class="btn-sm btn btn-info mr-2" [routerLink]=" '/home/project/'+p.id " >déatils</button>
+                            </td>
+                            
+
+
+                            
+                        </tr>
+                        
+                        
+                        
+
+                    </tbody>
+                </table>-->
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+<script>
+    $(document).ready(function() {
+          $('.dataTable').DataTable(
+            {
+              
+              "language": {
+                "search": "Rechercher :",
+                "lengthMenu": "Afficher _MENU_ projets par page",
+                "zeroRecords": "Rien trouvé - désolé",
+                "info": "Affichage de la page _PAGE_ de _PAGES_",
+                "infoEmpty": "Aucun enregistrement disponible",
+                "infoFiltered": "(filtré de _MAX_ projets au total)"
+              },
+              "responsive":true
+    
+            }
+          );
+        });
+
+</script>

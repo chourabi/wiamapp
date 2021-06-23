@@ -1,0 +1,151 @@
+<div class="container-fluid">
+
+    <p class="mb-4">
+        <a routerLink="/dashboard/home/projects" class="btn btn-primary">Retour</a>
+    </p>
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">{{project.name | titlecase}}</h1>
+    <p class="mb-4">
+        {{project.activity}}
+    </p>
+
+
+
+
+
+
+          <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">{{ 'Fichiers de projet' | titlecase }}</h6>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group">
+                <label for="">Ajouter un fichier</label>
+                <input type="file" (change)="selectFile($event)" class="form-control " >
+            </div>
+            <div *ngIf="currentFile" class="progress">
+                <div
+                  class="progress-bar progress-bar-info progress-bar-striped"
+                  role="progressbar"
+                  attr.aria-valuenow="{{ progress }}"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  [ngStyle]="{ width: progress + '%' }"
+                >
+                  {{ progress }}%
+                </div>
+              </div>
+
+
+            
+
+
+
+              <button class="btn btn-primary" (click)="getProjectDetails()" *ngIf="progress == 100" >Refresh</button>
+
+
+
+              
+
+
+            
+
+            <hr>
+
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Lien</th>
+                                
+                                
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr *ngFor="let f of project.files;let j=index;">
+                                <td>
+                                    {{j+1}}
+                                </td>
+                                <td>
+                                    <a [href]="'http://localhost:8080'+f.url" download>{{getFileName(f.url)}}</a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">{{ 'équipes afféctée' | titlecase }}</h6>
+        </div>
+        <div class="card-body">
+
+
+            <form [formGroup]="affectTeam" (ngSubmit)="addTeam()" >
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <label for="">équipe</label>
+                        <select class="form-control" formControlName="id_team">
+                            <option value="">Choissez une equipe</option>
+                            <option *ngFor="let t of allTeams" value="{{t.id}}">{{t.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-primary mt-4 btn-block" [disabled]="! affectTeam.valid">Affecter</button>
+                    </div>
+                </div>
+            </form>
+
+            <hr>
+
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nom de l'équipe</th>
+                                <th>Actions</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr *ngFor="let d of teams">
+                                <td>
+                                    {{d.id}}
+                                </td>
+                                <td>
+                                    {{d.team.name}}
+                                </td>
+
+                                <td>
+                                    <button class="btn-sm btn btn-danger" (click)="deleteTeam(d.id)">Supprimer</button>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
